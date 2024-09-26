@@ -77,12 +77,11 @@ function xoaNhanVien(tknv) {
 
 // --- function sửa---
 function openModal(tknv) {
-  document.getElementById("myModal").style.display = "block"; // Hiển thị modal
-  getInfoNhanVien(tknv); // Gọi hàm lấy thông tin nhân viên khi mở modal
+  $("#myModal").modal("show"); // Sử dụng jQuery để hiển thị modal
+  getInfoNhanVien(tknv);
 }
 
 function getInfoNhanVien(tknv) {
-  document.getElementById("myModal").style.display = "block";
   console.log(tknv);
 
   let nhanVien = arrNhanVien.find((item, index) => item.tknv == tknv); // sinhVien || undifined
