@@ -1,16 +1,5 @@
 let arrNhanVien = [];
-function getValueForm() {
-  let arrField = document.querySelectorAll(
-    "#form-content input, #form-content select"
-  );
-  console.log(arrField);
-  let nhanVien = new NhanVien();
-  for (let field of arrField) {
-    let { value, id } = field;
-    nhanVien[id] = value;
-  }
-  return nhanVien;
-}
+
 // thêm nhân viên
 document.getElementById("form-content").onsubmit = function (event) {
   event.preventDefault();
@@ -77,7 +66,19 @@ function xoaNhanVien(tknv) {
     setDataLocal("arrNhanVien", arrNhanVien);
   }
 }
-
+//--- get value form
+function getValueForm() {
+  let arrField = document.querySelectorAll(
+    "#form-content input, #form-content select"
+  );
+  console.log(arrField);
+  let nhanVien = new NhanVien();
+  for (let field of arrField) {
+    let { value, id } = field;
+    nhanVien[id] = value;
+  }
+  return nhanVien;
+}
 // --- function sửa---
 function openModal(tknv) {
   $("#myModal").modal("show"); // Sử dụng jQuery để hiển thị modal
@@ -101,7 +102,7 @@ function getInfoNhanVien(tknv) {
     }
   }
 }
-// rest
+//--- rest from ---
 function resetForm() {
   // Chọn tất cả các input và select trong card-body
   let arrField = document.querySelectorAll(
@@ -129,21 +130,4 @@ document.querySelector("#btnCapNhat").onclick = function () {
       $("#myModal").modal("hide");
     }
   }
-};
-
-// tìm kiếm nhân viên
-document.getElementById("btnTimNV").oninput = function (event) {
-  let keyword = event.target.value.trim().toLowerCase();
-  console.log(keyword);
-  let newKeyword = removeVietnameseTones(keyword);
-
-  let arrSearch = arrNhanVien.filter((item, index) => {
-    // item.txtTenSv =" Quang Khai" newKeyword="Quang"
-
-    let loaiNhanVien = removeVietnameseTones(
-      item.txtTenSV.trim().toLowerCase()
-    );
-    return newTenSinhVien.includes(newKeyword);
-  });
-  renderDataSinhVien(arrSearch);
 };
