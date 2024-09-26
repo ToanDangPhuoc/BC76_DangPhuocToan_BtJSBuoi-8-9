@@ -1,9 +1,5 @@
 let arrNhanVien = [];
-
-// thêm nhân viên
-document.getElementById("form-content").onsubmit = function (event) {
-  event.preventDefault();
-  console.log("hello");
+function getValueForm() {
   let arrField = document.querySelectorAll(
     "#form-content input, #form-content select"
   );
@@ -13,6 +9,13 @@ document.getElementById("form-content").onsubmit = function (event) {
     let { value, id } = field;
     nhanVien[id] = value;
   }
+  return nhanVien;
+}
+// thêm nhân viên
+document.getElementById("form-content").onsubmit = function (event) {
+  event.preventDefault();
+  console.log("hello");
+  let nhanVien = getValueForm();
   console.log(nhanVien);
   arrNhanVien.push(nhanVien);
   setDataLocal("arrNhanVien", arrNhanVien);
@@ -98,6 +101,35 @@ function getInfoNhanVien(tknv) {
     }
   }
 }
+// rest
+function resetForm() {
+  // Chọn tất cả các input và select trong card-body
+  let arrField = document.querySelectorAll(
+    "#form-content input, #form-content select"
+  );
+  for (let field of arrField) {
+    field.value = ""; // Đặt giá trị của từng trường thành rỗng
+    if (field.id === "tknv") {
+      field.readOnly = false; // Đặt lại thuộc tính readOnly nếu cần
+    }
+  }
+}
+// cập nhật
+document.querySelector("#btnCapNhat").onclick = function () {
+  console.log("Cập nhật");
+  let nhanVien = getValueForm(); // sinhVien | null
+  if (nhanVien) {
+    let index = arrNhanVien.findIndex((item, i) => item.tknv == nhanVien.tknv);
+    if (index != -1) {
+      arrNhanVien[index] = nhanVien;
+      renderData();
+      setDataLocal("arrNhanVien", arrNhanVien);
+      document.getElementById("tknv").readOnly = false;
+      resetForm();
+      $("#myModal").modal("hide");
+    }
+  }
+};
 
 // tìm kiếm nhân viên
 document.getElementById("btnTimNV").oninput = function (event) {
