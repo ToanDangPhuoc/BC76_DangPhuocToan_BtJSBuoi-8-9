@@ -1,13 +1,13 @@
 function validateForm() {
   // Lấy giá trị từ form
-  const tknv = document.getElementById("tknv").value.trim();
-  const name = document.getElementById("name").value.trim();
-  const email = document.getElementById("email").value.trim();
-  const password = document.getElementById("password").value.trim();
-  const datepicker = document.getElementById("datepicker").value.trim();
-  const luongCB = parseFloat(document.getElementById("luongCB").value.trim());
-  const chucvu = document.getElementById("chucvu").value.trim();
-  const gioLam = parseInt(document.getElementById("gioLam").value.trim());
+  let tknv = document.getElementById("tknv").value.trim();
+  let name = document.getElementById("name").value.trim();
+  let email = document.getElementById("email").value.trim();
+  let password = document.getElementById("password").value.trim();
+  let datepicker = document.getElementById("datepicker").value.trim();
+  let luongCB = parseFloat(document.getElementById("luongCB").value.trim());
+  let chucvu = document.getElementById("chucvu").value.trim();
+  let gioLam = parseInt(document.getElementById("gioLam").value.trim());
 
   let isValid = true;
 
