@@ -3,13 +3,16 @@ let arrNhanVien = [];
 // thêm nhân viên
 document.getElementById("form-content").onsubmit = function (event) {
   event.preventDefault();
-  console.log("hello");
-  let nhanVien = getValueForm();
-  console.log(nhanVien);
-  arrNhanVien.push(nhanVien);
-  setDataLocal("arrNhanVien", arrNhanVien);
-  renderData();
+  if (validateForm()) {
+    console.log("hello");
+    let nhanVien = getValueForm();
+    console.log(nhanVien);
+    arrNhanVien.push(nhanVien);
+    setDataLocal("arrNhanVien", arrNhanVien);
+    renderData();
+  }
 };
+
 // Hiển thị lên giao diện
 
 function renderData(arr = arrNhanVien) {
@@ -104,7 +107,6 @@ function getInfoNhanVien(tknv) {
 }
 //--- rest from ---
 function resetForm() {
-  // Chọn tất cả các input và select trong card-body
   let arrField = document.querySelectorAll(
     "#form-content input, #form-content select"
   );
@@ -118,16 +120,22 @@ function resetForm() {
 // cập nhật
 document.querySelector("#btnCapNhat").onclick = function () {
   console.log("Cập nhật");
-  let nhanVien = getValueForm(); // sinhVien | null
-  if (nhanVien) {
-    let index = arrNhanVien.findIndex((item, i) => item.tknv == nhanVien.tknv);
-    if (index != -1) {
-      arrNhanVien[index] = nhanVien;
-      renderData();
-      setDataLocal("arrNhanVien", arrNhanVien);
-      document.getElementById("tknv").readOnly = false;
-      resetForm();
-      $("#myModal").modal("hide");
+
+  // Gọi hàm validateForm để xác thực dữ liệu
+  if (validateForm()) {
+    let nhanVien = getValueForm();
+    if (nhanVien) {
+      let index = arrNhanVien.findIndex(
+        (item, i) => item.tknv == nhanVien.tknv
+      );
+      if (index != -1) {
+        arrNhanVien[index] = nhanVien;
+        renderData();
+        setDataLocal("arrNhanVien", arrNhanVien);
+        document.getElementById("tknv").readOnly = false;
+        resetForm();
+        $("#myModal").modal("hide");
+      }
     }
   }
 };
