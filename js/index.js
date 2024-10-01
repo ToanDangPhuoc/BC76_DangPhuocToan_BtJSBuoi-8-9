@@ -4,11 +4,13 @@ let arrNhanVien = [];
 document.getElementById("form-content").onsubmit = function (event) {
   console.log("hello");
   let nhanVien = getValueForm();
-  console.log(nhanVien);
-  arrNhanVien.push(nhanVien);
-  setDataLocal("arrNhanVien", arrNhanVien);
-  renderData();
-  event.preventDefault();
+  if (nhanVien != null) {
+    console.log(nhanVien);
+    arrNhanVien.push(nhanVien);
+    setDataLocal("arrNhanVien", arrNhanVien);
+    renderData();
+    event.preventDefault();
+  }
 };
 
 // Hiển thị lên giao diện
@@ -67,17 +69,17 @@ function xoaNhanVien(tknv) {
     setDataLocal("arrNhanVien", arrNhanVien);
   }
 }
-//--- get value form
+//--- get value form --- này a bỏ validation ra nè làm vẫn bth
 function getValueForm() {
   let arrField = document.querySelectorAll(
     "#form-content input,#form-content select"
   );
+  let flag = true;
   let nhanVien = new NhanVien();
   for (let field of arrField) {
     let { value, id } = field;
     nhanVien[id] = value;
   }
-  console.log("NhanVien Object:", nhanVien);
   return nhanVien;
 }
 // --- function sửa---
@@ -114,25 +116,24 @@ function resetForm() {
   }
 }
 // cập nhật
-document.querySelector("#btnCapNhat").onclick = function () {
+document.getElementById("btnCapNhat").onclick = function () {
   console.log("Cập nhật");
-};
+  let nhanVien = getValueForm();
+  let index = -1;
+  let email = nhanVien.email;
+  for (let i in arrNhanVien) {
+    if (arrNhanVien[i].email == email) {
+      // đây nữa
+      index = i;
+      break;
+    }
+  }
+  if (index != -1) {
+    arrNhanVien[index] = nhanVien;
+    renderData();
+    setDataLocal("arrNhanVien", arrNhanVien);
 
-// Gọi hàm validateForm để xác thực dữ liệu
-//   let nhanVien = getValueForm();
-//   if (validateForm(nhanVien)) {
-//     if (nhanVien) {
-//       let index = arrNhanVien.findIndex(
-//         (item, i) => item.tknv == nhanVien.tknv
-//       );
-//       if (index != -1) {
-//         arrNhanVien[index] = nhanVien;
-//         renderData();
-//         setDataLocal("arrNhanVien", arrNhanVien);
-//         document.getElementById("tknv").readOnly = false;
-//         resetForm();
-//         $("#myModal").modal("hide");
-//       }
-//     }
-//   }
-// }
+    $("#myModal").modal("hide");
+  }
+};
+// nó vẫn sửa nè mà k đóng modal no dang loi^~ a oi // hahaha ngóa đá thiệt// hết lõi r á =)) còn khúc validation thôi để a đẩy lên git  okee a oi,, e rãnh check giup a sao xài validation k đc =)) a cũng mò coi sao nào đc hú nhau tiếng nha // à còn nữa cái phần util dùng để làm gì a quên r a chưa tạo nữa
