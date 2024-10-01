@@ -136,4 +136,3 @@ document.getElementById("btnCapNhat").onclick = function () {
     $("#myModal").modal("hide");
   }
 };
-// nó vẫn sửa nè mà k đóng modal no dang loi^~ a oi // hahaha ngóa đá thiệt// hết lõi r á =)) còn khúc validation thôi để a đẩy lên git  okee a oi,, e rãnh check giup a sao xài validation k đc =)) a cũng mò coi sao nào đc hú nhau tiếng nha // à còn nữa cái phần util dùng để làm gì a quên r a chưa tạo nữa
