@@ -2,15 +2,13 @@ let arrNhanVien = [];
 
 // thêm nhân viên
 document.getElementById("form-content").onsubmit = function (event) {
+  console.log("hello");
+  let nhanVien = getValueForm();
+  console.log(nhanVien);
+  arrNhanVien.push(nhanVien);
+  setDataLocal("arrNhanVien", arrNhanVien);
+  renderData();
   event.preventDefault();
-  if (validateForm()) {
-    console.log("hello");
-    let nhanVien = getValueForm();
-    console.log(nhanVien);
-    arrNhanVien.push(nhanVien);
-    setDataLocal("arrNhanVien", arrNhanVien);
-    renderData();
-  }
 };
 
 // Hiển thị lên giao diện
@@ -62,7 +60,7 @@ function getDataLocal(key) {
 
 //---function xóa ----
 function xoaNhanVien(tknv) {
-  let index = arrNhanVien.findIndex((item, i) => item.tknv == tknv); // -1
+  let index = arrNhanVien.findIndex((item, i) => item.tknv == tknv);
   if (index != -1) {
     arrNhanVien.splice(index, 1);
     renderData();
@@ -72,32 +70,30 @@ function xoaNhanVien(tknv) {
 //--- get value form
 function getValueForm() {
   let arrField = document.querySelectorAll(
-    "#form-content input, #form-content select"
+    "#form-content input,#form-content select"
   );
-  console.log(arrField);
   let nhanVien = new NhanVien();
   for (let field of arrField) {
     let { value, id } = field;
     nhanVien[id] = value;
   }
+  console.log("NhanVien Object:", nhanVien);
   return nhanVien;
 }
 // --- function sửa---
 function openModal(tknv) {
-  $("#myModal").modal("show"); // Sử dụng jQuery để hiển thị modal
+  $("#myModal").modal("show");
   getInfoNhanVien(tknv);
 }
 
 function getInfoNhanVien(tknv) {
   console.log(tknv);
-
-  let nhanVien = arrNhanVien.find((item, index) => item.tknv == tknv); // sinhVien || undifined
+  let nhanVien = arrNhanVien.find((item, index) => item.tknv == tknv);
   if (nhanVien) {
     let arrField = document.querySelectorAll(
       "#form-content  input, #form-content select"
     );
     for (let field of arrField) {
-      // field đại diện cho các input và select tìm kiếm được trong form
       field.value = nhanVien[field.id];
       if (field.id == "tknv") {
         field.readOnly = true;
@@ -111,31 +107,32 @@ function resetForm() {
     "#form-content input, #form-content select"
   );
   for (let field of arrField) {
-    field.value = ""; // Đặt giá trị của từng trường thành rỗng
+    field.value = "";
     if (field.id === "tknv") {
-      field.readOnly = false; // Đặt lại thuộc tính readOnly nếu cần
+      field.readOnly = false;
     }
   }
 }
 // cập nhật
 document.querySelector("#btnCapNhat").onclick = function () {
   console.log("Cập nhật");
-
-  // Gọi hàm validateForm để xác thực dữ liệu
-  if (validateForm()) {
-    let nhanVien = getValueForm();
-    if (nhanVien) {
-      let index = arrNhanVien.findIndex(
-        (item, i) => item.tknv == nhanVien.tknv
-      );
-      if (index != -1) {
-        arrNhanVien[index] = nhanVien;
-        renderData();
-        setDataLocal("arrNhanVien", arrNhanVien);
-        document.getElementById("tknv").readOnly = false;
-        resetForm();
-        $("#myModal").modal("hide");
-      }
-    }
-  }
 };
+
+// Gọi hàm validateForm để xác thực dữ liệu
+//   let nhanVien = getValueForm();
+//   if (validateForm(nhanVien)) {
+//     if (nhanVien) {
+//       let index = arrNhanVien.findIndex(
+//         (item, i) => item.tknv == nhanVien.tknv
+//       );
+//       if (index != -1) {
+//         arrNhanVien[index] = nhanVien;
+//         renderData();
+//         setDataLocal("arrNhanVien", arrNhanVien);
+//         document.getElementById("tknv").readOnly = false;
+//         resetForm();
+//         $("#myModal").modal("hide");
+//       }
+//     }
+//   }
+// }
