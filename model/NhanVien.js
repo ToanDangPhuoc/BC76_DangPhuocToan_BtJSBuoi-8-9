@@ -10,7 +10,7 @@ class NhanVien {
   tinhTongLuong = function () {
     let tongLuong = 0;
     switch (this.chucvu) {
-      case "Giám đốc":
+      case "Sếp":
         tongLuong = this.luongCB * 1 * 3;
         break;
       case "Trưởng phòng":

@@ -43,3 +43,4 @@ function checkPasswordValue(theThongBao, value) {
     return false;
   }
 }
+

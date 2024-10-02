@@ -69,7 +69,7 @@ function xoaNhanVien(tknv) {
     setDataLocal("arrNhanVien", arrNhanVien);
   }
 }
-//--- get value form --- này a bỏ validation ra nè làm vẫn bth
+//--- get value form ---
 function getValueForm() {
   let arrField = document.querySelectorAll(
     "#form-content input,#form-content select"
@@ -127,7 +127,6 @@ document.getElementById("btnCapNhat").onclick = function () {
   let email = nhanVien.email;
   for (let i in arrNhanVien) {
     if (arrNhanVien[i].email == email) {
-      // đây nữa
       index = i;
       break;
     }
@@ -139,4 +138,5 @@ document.getElementById("btnCapNhat").onclick = function () {
 
     $("#myModal").modal("hide");
   }
+  resetForm();
 };

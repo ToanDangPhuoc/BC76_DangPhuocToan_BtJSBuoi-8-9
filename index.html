@@ -228,6 +228,7 @@
                     id="tknv"
                     class="form-control input-sm"
                     placeholder="Tài khoản"
+                    data-account="account"
                   />
                 </div>
 
@@ -242,11 +243,12 @@
                     ></span>
                   </div>
                   <input
-                    type="name"
+                    type="text"
                     name="name"
                     id="name"
                     class="form-control input-sm"
                     placeholder="Họ và tên"
+                    data-name="name"
                   />
                 </div>
                 <span class="sp-thongbao" id="tbTen"></span>
@@ -265,6 +267,7 @@
                     id="email"
                     class="form-control input-sm"
                     placeholder="Email"
+                    data-email="email"
                   />
                 </div>
 
@@ -284,6 +287,7 @@
                     id="password"
                     class="form-control input-sm"
                     placeholder="Mật khẩu"
+                    data-password="password"
                   />
                 </div>
                 <span class="sp-thongbao" id="tbMatKhau"></span>
@@ -302,6 +306,7 @@
                     id="datepicker"
                     class="form-control"
                     placeholder="Ngày làm"
+                    data-date="date"
                   />
                 </div>
 
@@ -321,6 +326,7 @@
                     id="luongCB"
                     class="form-control input-sm"
                     placeholder="Lương cơ bản"
+                    data-luong="luong"
                   />
                 </div>
                 <span class="sp-thongbao" id="tbLuongCB"></span>
@@ -332,7 +338,7 @@
                       ><i class="fa fa-briefcase"></i
                     ></span>
                   </div>
-                  <select class="form-control" id="chucvu">
+                  <select class="form-control" id="chucvu" data-chucVu="chucVu">
                     <option disabled selected value="">Chọn chức vụ</option>
                     <option>Sếp</option>
                     <option>Trưởng phòng</option>
@@ -355,6 +361,7 @@
                     id="gioLam"
                     class="form-control input-sm"
                     placeholder="Giờ làm"
+                    data-gioLam="gioLam"
                   />
                 </div>
                 <span class="sp-thongbao" id="tbGiolam"></span>
