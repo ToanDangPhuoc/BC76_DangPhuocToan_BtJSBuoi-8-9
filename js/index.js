@@ -86,6 +86,10 @@ function getValueForm() {
 function openModal(tknv) {
   $("#myModal").modal("show");
   getInfoNhanVien(tknv);
+  let nutThem = document.getElementById("btnThemNV");
+  if (nutThem) {
+    nutThem.disabled = true;
+  }
 }
 
 function getInfoNhanVien(tknv) {
